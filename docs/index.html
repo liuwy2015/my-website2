@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Agricultural Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="hero-section">
+        <video autoplay muted loop id="myVideo">
+            <source src="assets/bg4.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-title">
+                    <h1>Fields of Tomorrow</h1>
+                    <p class="hero-description" style="font-family: 'Montserrat', sans-serif; color: #C9D6E0; font-weight: bold;">COM-480 DATA VISUALIZATION SPRING 2025<br>GROUP PROJECT BY YAKETY</p>
+                </div>
+                <button class="cta-button" onclick="scrollToContent()">
+                    Get Started
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="mission-card">
+                <h3>TEAM MEMBERS</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <span>Yuan Xiao</span>
+                        <span>404006</span>
+                    </div>
+                    <div class="team-member">
+                        <span>Jingyi Guo</span>
+                        <span>377173</span>
+                    </div>
+                    <div class="team-member">
+                        <span>Wenyu Liu</span>
+                        <span>383193</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="intro-section">
+            <div class="intro-image">
+                <img src="assets/grain-field.jpg" alt="Agricultural field">
+            </div>
+            <div class="intro-text">
+                <div class="paper-effect">
+                    <div class="corner-line top-right"></div>
+                    <div class="corner-line bottom-left"></div>
+                    <h2 class="intro-title">Global Food Production: An Urgent Challenge<br>for a Sustainable Future</h2>
+                    <p>Today, the world's grain production—especially wheat, rice, and coarse cereals—exhibits notable differences across regions, reflecting both growth and vulnerability. Our visualizations are designed to be practical and easy to understand, offering useful information for those involved in policymaking, research, education, and for anyone interested in these issues.</p>
+                    <p>Explore our interactive maps, charts, and analyses to understand how agricultural practices have evolved across different regions and what this means for our future. From production patterns to sustainability indicators, our project seeks to support more informed choices about food production and sustainability.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container world-map">
+                <div class="controls">
+                    <div class="crop-buttons">
+                        <!-- 按钮会由 JavaScript 动态添加 -->
+                    </div>
+                </div>
+                <div id="map"></div>
+            </div>
+            
+            <div class="chart-container region-production">
+                <div class="chart-title">Production per Continent (Million Tonnes)</div>
+                <div id="bar-chart"></div>
+            </div>
+            
+            <div class="chart-container trends">
+                <div class="chart-title">Production Trends over Time (Million Tonnes)</div>
+                <div id="area-chart"></div>
+            </div>
+        </div>
+
+        <!-- Add title and description container -->
+        <div class="racing-bar-title-container">
+            <h2>REGIONAL PRODUCTION DYNAMICS</h2>
+            <div class="description">
+                <p>Watch how the world's leading producers of staple cereal crops—specifically rice (milled), wheat, and coarse grains—have changed from 1961 to 2007. This animated bar chart vividly illustrates the annual rankings of these key crops, showing how national production volumes in million tonnes have grown, declined, or remained stable over the decades.</p>
+                <p>The visualization highlights the consistent dominance of China, India, and the United States in global cereal production, while also illustrating the steady rise of other countries such as Indonesia and Brazil. These trends help pinpoint regions that have become key players in global food security.</p>
+            </div>
+        </div>
+
+        <div class="category-select-container">
+            <div class="category-select">
+                <label for="category-select">Category:</label>
+                <select id="category-select"></select>
+            </div>
+        </div>
+        
+        <!-- 扩展 SVG 宽度和左右留白，以保证小柱数值标签和国家名称不会超出可视范围 -->
+        <svg id="racing-bar-chart" width="1400" height="600"></svg>
+
+        <!-- Add sustainable development intro section -->
+        <div class="intro-section sustainability-intro">
+            <div class="intro-text">
+                <div class="paper-effect">
+                    <div class="corner-line top-left"></div>
+                    <div class="corner-line bottom-right"></div>
+                    <h2 class="intro-title">Sustainability: A Growing Priority in Agriculture</h2>
+                    <p>In recent years, sustainability has emerged as a crucial theme in agriculture, driven by the urgent need to balance food production with environmental health. Although the concept of sustainability gained significant traction in the late 20th century, it has roots that go back to earlier conservation movements and ideas of "stewardship of the land." Today, sustainability in agriculture means using resources efficiently, reducing environmental impacts, and ensuring that food systems remain resilient for generations to come.
+                    </p>        
+                </div>
+            </div>
+            <div class="intro-image">
+                <img src="assets/sustainable-farm.jpg" alt="Sustainable farming landscape">
+            </div>
+        </div>
+
+        <!-- Add title and description for land utilization section -->
+        <div class="racing-bar-title-container">
+            <h2>SUSTAINABLE RESOURCE USE</h2>
+            <div class="description">
+                <p>This visualization explores three important aspects of sustainable agriculture: land use, fertilizer usage, and water resource utilization. For each continent, it becomes clear how agricultural land area (% of total land), fertilizer consumption (kilograms per hectare of arable land), and agricultural water withdrawal (% of total renewable water resources) have changed over time. The map's color intensity reflects the magnitude of each indicator—darker colors indicate higher values.</p>
+                <p>The interactive design allows you to follow the progression of these indicators automatically, or to manually explore specific years for more detailed insights. From these visualizations, you can see regions with intensive land and fertilizer use—often linked to both high productivity and environmental challenges. The water use data reveals areas at risk of over-extracting water for farming, which can threaten future supplies. Together, these indicators paint a clear picture of the balancing act between agricultural output and sustainability.</p>
+            </div>
+        </div>
+
+        <div class="chart-container land-utilization">
+            <div class="land-controls">
+                <div class="land-buttons"></div>
+                <select id="land-year-select" class="land-year-select"></select>
+            </div>
+            <div id="land-map"></div>
+        </div>
+
+        <!-- Add new title and description for radar charts -->
+        <div class="racing-bar-title-container">
+            <h2>SUSTAINABLE INTENSIFICATION INDICATORS ACROSS REGIONS</h2>
+            <div class="description">
+                <p>This section showcases six radar charts comparing key sustainability factors for different regions. We analyzed agricultural production data from 1961 to 2007 and performed polynomial regression on five critical dimensions: land use, fertilizer intensity, cropland stability, agro-economic advancement, and water use efficiency.</p>
+                <p>Polynomial regression was chosen over linear models because agricultural systems often experience non-linear trends and interactions over time. The resulting coefficients—plotted in the radar charts—capture how strongly each factor influences agricultural production within each region.</p>
+                <p>By hovering over each radar chart, you can view specific numeric values and accompanying descriptions, offering a more detailed understanding of each region's sustainability profile. This analysis helps us understand the balance and trade-offs in agricultural sustainability. For example, regions with high fertilizer intensity coefficients might be relying more heavily on chemical inputs, while those with higher water use efficiency may have more resilient production systems. By comparing these patterns, we gain insights into how different regions prioritize and manage key resources—highlighting pathways for sustainable intensification and future agricultural development.</p>
+            </div>
+        </div>
+
+        <div class="radar-section">            
+            <div class="radar-grid">
+                <div class="radar-item">
+                    <div class="chart-title">Africa</div>
+                    <canvas id="radarChart-Africa"></canvas>
+                </div>
+                <div class="radar-item">
+                    <div class="chart-title">Asia</div>
+                    <canvas id="radarChart-Asia"></canvas>
+                </div>
+                <div class="radar-item">
+                    <div class="chart-title">Europe</div>
+                    <canvas id="radarChart-Europe"></canvas>
+                </div>
+                <div class="radar-item">
+                    <div class="chart-title">North America</div>
+                    <canvas id="radarChart-NorthAmerica"></canvas>
+                </div>
+                <div class="radar-item">
+                    <div class="chart-title">Oceania</div>
+                    <canvas id="radarChart-Oceania"></canvas>
+                </div>
+                <div class="radar-item">
+                    <div class="chart-title">South America</div>
+                    <canvas id="radarChart-SouthAmerica"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToContent() {
+            const contentSection = document.querySelector('.container');
+            const introSection = document.querySelector('.intro-section');
+            
+            if (contentSection) {
+                const offset = 50; // 50px ≈ 1cm
+                const elementPosition = contentSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // 添加延迟以配合滚动动画
+                setTimeout(() => {
+                    introSection.classList.add('visible');
+                }, 500);
+            }
+        }
+    </script>
+    
+    <script type="module" src="js/charts/main.js"></script>
+    <script type="module" src="js/charts/radar.js"></script>
+    <script type="module" src="js/charts/dynamic.js"></script>
+    <script type="module" src="js/charts/land-map.js"></script>
+    <script type="module" src="js/charts/constants.js"></script>
+</body>
+</html>
